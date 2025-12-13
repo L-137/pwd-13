@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Hitung Volume Bangun Ruang</title>
+<style>
+body{
+    background-color: #e3f2fd;
+    font-family: Arial;
+    padding: 20px;
+}
+.container{
+    background-color: white;
+    width: 450px;
+    margin: 30px auto;
+    padding: 25px;
+    border: 2px solid #1976d2;
+}
+h2{
+    text-align: center;
+    color: #1976d2;
+}
+label{
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+select, input{
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+}
+button{
+    width: 100%;
+    padding: 10px;
+    background-color: #1976d2;
+    color: white;
+    border: none;
+    margin-top: 10px;
+    cursor: pointer;
+    font-size: 15px;
+}
+button:hover{
+    background-color: #1565c0;
+}
+#formInput{
+    margin-top: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h2>Kalkulator Volume Bangun Ruang</h2>
+
+<label>Pilih Bangun Ruang:</label>
+<select id="pilihan" onchange="tampilInput()">
+<option value="">-- Pilih --</option>
+<option value="balok">Balok</option>
+<option value="tabung">Tabung</option>
+<option value="bola">Bola</option>
+<option value="prisma">Prisma Segitiga</option>
+<option value="kerucut">Kerucut</option>
+</select>
+
+<div id="formInput"></div>
+
+<button onclick="hitung()">Hitung</button>
+</div>
+
+<script>
+function tampilInput(){
+var pilih = document.getElementById("pilihan").value;
+var form = document.getElementById("formInput");
+form.innerHTML = "";
+
+if(pilih == "balok"){
+    form.innerHTML = `
+        <label>Panjang:</label>
+        <input type="number" id="input1">
+        <label>Lebar:</label>
+        <input type="number" id="input2">
+        <label>Tinggi:</label>
+        <input type="number" id="input3">
+    `;
+}
+else if(pilih == "tabung"){
+    form.innerHTML = `
+        <label>Jari-jari:</label>
+        <input type="number" id="input1">
+        <label>Tinggi:</label>
+        <input type="number" id="input2">
+    `;
+}
+else if(pilih == "bola"){
+    form.innerHTML = `
+        <label>Jari-jari:</label>
+        <input type="number" id="input1">
+    `;
+}
+else if(pilih == "prisma"){
+    form.innerHTML = `
+        <label>Tinggi Alas:</label>
+        <input type="number" id="input1">
+        <label>Panjang Alas:</label>
+        <input type="number" id="input2">
+        <label>Tinggi Prisma:</label>
+        <input type="number" id="input3">
+    `;
+}
+else if(pilih == "kerucut"){
+    form.innerHTML = `
+        <label>Jari-jari:</label>
+        <input type="number" id="input1">
+        <label>Tinggi:</label>
+        <input type="number" id="input2">
+    `;
+}
+}
+
+function hitung(){
+var pilih = document.getElementById("pilihan").value;
+var volume;
+
+if(pilih == ""){
+    alert("Pilih bangun ruang dulu!");
+    return;
+}
+
+switch(pilih){
+    case "balok":
+        var panjang = document.getElementById("input1").value;
+        var lebar = document.getElementById("input2").value;
+        var tinggi = document.getElementById("input3").value;
+        
+        if(panjang == "" || lebar == "" || tinggi == ""){
+            alert("Isi semua data!");
+            return;
+        }
+        
+        volume = panjang * lebar * tinggi;
+        alert("Volume Balok = " + volume + " satuan kubik");
+        break;
+        
+    case "tabung":
+        var r = document.getElementById("input1").value;
+        var t = document.getElementById("input2").value;
+        
+        if(r == "" || t == ""){
+            alert("Isi semua data!");
+            return;
+        }
+        
+        volume = 3.14 * r * r * t;
+        alert("Volume Tabung = " + volume + " satuan kubik");
+        break;
+        
+    case "bola":
+        var r = document.getElementById("input1").value;
+        
+        if(r == ""){
+            alert("Isi data jari-jari!");
+            return;
+        }
+        
+        volume = (4/3) * 3.14 * r * r * r;
+        alert("Volume Bola = " + volume + " satuan kubik");
+        break;
+        
+    case "prisma":
+        var tinggiAlas = document.getElementById("input1").value;
+        var panjangAlas = document.getElementById("input2").value;
+        var tinggiPrisma = document.getElementById("input3").value;
+        
+        if(tinggiAlas == "" || panjangAlas == "" || tinggiPrisma == ""){
+            alert("Isi semua data!");
+            return;
+        }
+        
+        volume = 0.5 * tinggiAlas * panjangAlas * tinggiPrisma;
+        alert("Volume Prisma Segitiga = " + volume + " satuan kubik");
+        break;
+        
+    case "kerucut":
+        var r = document.getElementById("input1").value;
+        var t = document.getElementById("input2").value;
+        
+        if(r == "" || t == ""){
+            alert("Isi semua data!");
+            return;
+        }
+        
+        volume = (1/3) * 3.14 * r * r * t;
+        alert("Volume Kerucut = " + volume + " satuan kubik");
+        break;
+}
+}
+</script>
+
+</body>
+</html>
